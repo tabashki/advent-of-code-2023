@@ -27,8 +27,8 @@ impl Hand {
         self.blue = self.blue.max(other.blue);
     }
 
-    fn power(&self) -> i64 {
-        (self.red * self.green * self.blue).into()
+    fn power(&self) -> i32 {
+        self.red * self.green * self.blue
     }
 }
 
@@ -36,7 +36,7 @@ fn main() {
     let path = env::args().nth(1).unwrap();
     let input = fs::read_to_string(path).unwrap();
 
-    let mut total_power: i64 = 0;
+    let mut total_power = 0;
     let mut valid_games = Vec::<i32>::new();
 
     let max_hand = Hand { red: 12, green: 13, blue: 14 };
@@ -54,11 +54,11 @@ fn main() {
         let mut required_hand = Hand { ..Default::default() };
 
         for cube_hand in game_content.split("; ") {
-            let mut current_hand = Hand{ ..Default::default() };
+            let mut current_hand = Hand { ..Default::default() };
 
             for cube in cube_hand.split(", ") {
                 let (value, color) = {
-                    let mut iter = cube.split_ascii_whitespace();
+                    let mut iter = cube.split_whitespace();
                     let n = i32::from_str_radix(iter.next().unwrap(), 10).unwrap();
                     let c = iter.next().unwrap();
                     (n, c)
@@ -67,7 +67,7 @@ fn main() {
                     "red" => current_hand.red += value,
                     "green" => current_hand.green += value,
                     "blue" => current_hand.blue += value,
-                    _ => panic!()
+                    _ => unreachable!()
                 };
             }
 
