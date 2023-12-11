@@ -54,15 +54,6 @@ impl GalaxyMap {
             }
         }
 
-        galaxies.sort_by(|a, b| {
-            let c = a.1.cmp(&b.1);
-            if c == Ordering::Equal {
-                a.0.cmp(&b.0)
-            } else {
-                c
-            }
-        });
-
         GalaxyMap {
             galaxies: galaxies,
         }
