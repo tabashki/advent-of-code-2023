@@ -1,9 +1,5 @@
-use core::fmt;
-use std::cmp::Ordering;
-use std::collections::HashSet;
 use std::env;
 use std::fs;
-use std::ops::Index;
 use std::time::Instant;
 
 
@@ -68,7 +64,7 @@ fn manhattan_dist(a: (i64, i64), b: (i64, i64)) -> i64 {
 
 fn sum_galaxy_distances(map: &GalaxyMap) -> i64 {
     let mut sum = 0;
-    
+
     for i in 0..map.galaxies.len() {
         let a = &map.galaxies[i];
         for b in &map.galaxies[(i+1)..] {
@@ -101,7 +97,7 @@ fn main() {
 
     let p1 = sum_galaxy_distances(&p1_galaxy_map);
     println!("Part 1 result: {}", p1);
-    
+
     let p2 = sum_galaxy_distances(&p2_galaxy_map);
     println!("Part 2 result: {}", p2);
 
